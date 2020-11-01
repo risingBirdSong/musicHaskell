@@ -6,6 +6,7 @@ import qualified Data.ByteString.Lazy as B
 import qualified Data.ByteString.Builder as B
 import Data.List
 import Data.Foldable
+import qualified System.Process as SP
 volume = 0.5
 filename = "test.bin"
 wave :: [Float]
@@ -16,8 +17,12 @@ built = B.toLazyByteString $ fold $ (map (B.floatLE) wave)
 
 save :: IO ()
 save = B.writeFile filename $ built
+
 -- command
 -- ffplay -f f32le -ar 48000 test.bin
+play :: IO ()
+play = do 
+    save 
 
 someFunc :: IO ()
 someFunc = putStrLn "someFunc"
